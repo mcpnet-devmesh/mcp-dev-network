@@ -106,8 +106,7 @@ CREATE INDEX IF NOT EXISTS idx_auth_users_email ON auth_users(email);
 -- ROW-LEVEL SECURITY
 -- Requirement 9.1: FORCE habilitado en todas las tablas con datos de usuario
 -- Requirement 9.6: Sin app.current_user_id → acceso denegado
--- ==================================================no podemos crear un app o algo parecido ( recolector ) donde tú app busca todos los días dinero gratis como aidrop premios etec 
-===========================
+-- =============================================================================
 
 -- profiles (Req 9.3)
 ALTER TABLE profiles ENABLE ROW LEVEL SECURITY;
