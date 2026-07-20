@@ -40,6 +40,9 @@ from mcp_dev_network.tools.report_content import ReportContentError, handle_repo
 from mcp_dev_network.tools.search_resources import handle_search_resources
 from mcp_dev_network.tools.send_message import SendMessageError, handle_send_message
 from mcp_dev_network.tools.share_resource import ShareResourceError, handle_share_resource
+from mcp_dev_network.tools.search_users import SearchUsersRequest, handle_search_users
+from mcp_dev_network.tools.create_post import CreatePostRequest, handle_create_post
+from mcp_dev_network.tools.get_feed import GetFeedRequest, handle_get_feed
 
 # ---------------------------------------------------------------------------
 # Tool registry: maps tool name → (request model, handler, needs_user_id)
@@ -79,6 +82,21 @@ _TOOLS: dict[str, dict[str, Any]] = {
         "model": ReportContentRequest,
         "handler": handle_report_content,
         "needs_user_id": True,
+    },
+    "search_users": {
+        "model": SearchUsersRequest,
+        "handler": handle_search_users,
+        "needs_user_id": False,
+    },
+    "create_post": {
+        "model": CreatePostRequest,
+        "handler": handle_create_post,
+        "needs_user_id": True,
+    },
+    "get_feed": {
+        "model": GetFeedRequest,
+        "handler": handle_get_feed,
+        "needs_user_id": False,
     },
 }
 
