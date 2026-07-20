@@ -10,6 +10,7 @@ RUN mkdir -p /app/mcp_dev_network/tools /app/mcp_dev_network/tests
 # Copy source files
 COPY __init__.py /app/mcp_dev_network/
 COPY auth.py /app/mcp_dev_network/
+COPY auth_self.py /app/mcp_dev_network/
 COPY crypto.py /app/mcp_dev_network/
 COPY database.py /app/mcp_dev_network/
 COPY logger.py /app/mcp_dev_network/

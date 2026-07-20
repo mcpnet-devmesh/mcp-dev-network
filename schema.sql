@@ -91,11 +91,23 @@ CREATE TABLE IF NOT EXISTS rate_limits (
 
 CREATE INDEX IF NOT EXISTS idx_rate_limits_lookup ON rate_limits(user_id, operation, created_at);
 
+-- Tabla de auth self-service
+CREATE TABLE IF NOT EXISTS auth_users (
+    user_id TEXT PRIMARY KEY,
+    email TEXT UNIQUE NOT NULL,
+    password_hash TEXT NOT NULL,
+    salt TEXT NOT NULL,
+    created_at TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+
+CREATE INDEX IF NOT EXISTS idx_auth_users_email ON auth_users(email);
+
 -- =============================================================================
 -- ROW-LEVEL SECURITY
 -- Requirement 9.1: FORCE habilitado en todas las tablas con datos de usuario
 -- Requirement 9.6: Sin app.current_user_id → acceso denegado
--- =============================================================================
+-- ==================================================no podemos crear un app o algo parecido ( recolector ) donde tú app busca todos los días dinero gratis como aidrop premios etec 
+===========================
 
 -- profiles (Req 9.3)
 ALTER TABLE profiles ENABLE ROW LEVEL SECURITY;

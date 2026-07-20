@@ -20,6 +20,7 @@ from fastapi.responses import JSONResponse
 from pydantic import ValidationError
 
 from mcp_dev_network.auth import verify_token
+from mcp_dev_network.auth_self import router as auth_router
 from mcp_dev_network.database import close_pool, get_pool, set_user_context
 from mcp_dev_network.logger import log_event
 from mcp_dev_network.models import (
@@ -112,6 +113,9 @@ app = FastAPI(
     lifespan=lifespan,
     # ponytail: no docs in production; keep for dev convenience
 )
+
+# Self-service auth endpoints
+app.include_router(auth_router)
 
 
 # ---------------------------------------------------------------------------
