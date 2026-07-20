@@ -1,8 +1,8 @@
 # MCP Dev Network
 
-A social network for developers, built as an MCP server. Connect your AI-powered IDE and interact with other devs — send messages, share resources, post to a public feed, and discover people by stack.
+A social network for developers, built as an MCP server. Connect your AI-powered IDE and interact with other devs — send messages, share resources, post to a public feed, follow people, and discover developers by stack.
 
-Una red social para desarrolladores, construida como servidor MCP. Conecta tu IDE con IA e interactúa con otros devs — envía mensajes, comparte recursos, publica en un feed público y descubre gente por tecnología.
+Una red social para desarrolladores, construida como servidor MCP. Conecta tu IDE con IA e interactúa con otros devs — envía mensajes, comparte recursos, publica en un feed público, sigue personas y descubre gente por tecnología.
 
 ---
 
@@ -96,7 +96,7 @@ Una vez conectado, pide a tu asistente IA:
 
 ---
 
-## 🛠️ Available Tools / Herramientas Disponibles (10)
+## 🛠️ Available Tools / Herramientas Disponibles (20)
 
 ### Profiles / Perfiles
 
@@ -104,34 +104,54 @@ Una vez conectado, pide a tu asistente IA:
 |------|---------------------------|-----------|
 | `register` | Create your profile / Crear tu perfil | `username`, `stack[]`, `bio` |
 | `get_profile` | View a user's profile / Ver perfil de un usuario | `username` |
+| `get_my_profile` | View your own profile / Ver tu propio perfil | — |
+| `list_users` | Browse all devs / Ver todos los devs | `limit?`, `offset?` |
 | `search_users` | Find devs by stack or name / Buscar devs por stack o nombre | `query?`, `stack?[]` |
 
-### Messaging / Mensajería
+### Social / Red Social
 
 | Tool | Description / Descripción | Arguments |
 |------|---------------------------|-----------|
-| `send_message` | Send encrypted private message / Enviar mensaje privado cifrado | `to_username`, `content` |
-| `get_messages` | Read your inbox / Leer tu bandeja de entrada | `limit?`, `before_id?` |
+| `follow` | Follow a developer / Seguir a un dev | `username` |
+| `unfollow` | Unfollow a developer / Dejar de seguir | `username` |
+| `my_following` | List who you follow / Ver a quién sigues | — |
+| `discover` | Discover devs to follow / Descubrir devs | `stack?[]` |
 
 ### Feed
 
 | Tool | Description / Descripción | Arguments |
 |------|---------------------------|-----------|
-| `create_post` | Publish to public feed / Publicar en el feed público | `content`, `tags?[]` |
+| `create_post` | Publish to public feed / Publicar en el feed | `content`, `tags?[]` |
 | `get_feed` | Read recent posts / Leer posts recientes | `limit?`, `before_id?`, `tag?` |
+| `delete_post` | Delete your own post / Borrar tu post | `post_id` |
+| `like_post` | Like a post / Dar like a un post | `post_id` |
+
+### Messaging / Mensajería
+
+| Tool | Description / Descripción | Arguments |
+|------|---------------------------|-----------|
+| `send_message` | Send encrypted private message / Enviar mensaje cifrado | `to_username`, `content` |
+| `get_messages` | Read your inbox / Leer tu bandeja | `limit?`, `before_id?` |
+
+### Notifications / Notificaciones
+
+| Tool | Description / Descripción | Arguments |
+|------|---------------------------|-----------|
+| `get_notifications` | View your alerts / Ver tus alertas | `limit?` |
+| `mark_read` | Mark notifications as read / Marcar como leídas | `notification_ids[]` |
 
 ### Resources / Recursos
 
 | Tool | Description / Descripción | Arguments |
 |------|---------------------------|-----------|
-| `share_resource` | Share a link, snippet or tutorial / Compartir link o tutorial | `title`, `url_or_snippet`, `tags[]` |
+| `share_resource` | Share a link or snippet / Compartir link o snippet | `title`, `url_or_snippet`, `tags[]` |
 | `search_resources` | Search by tags or full-text / Buscar por tags o texto | `tags?[]`, `query?` |
 
 ### Moderation / Moderación
 
 | Tool | Description / Descripción | Arguments |
 |------|---------------------------|-----------|
-| `report_content` | Report inappropriate content / Reportar contenido | `content_id` (msg_N/res_N), `reason` |
+| `report_content` | Report inappropriate content / Reportar contenido | `content_id`, `reason` |
 
 ---
 
@@ -144,10 +164,15 @@ Una vez conectado, habla con tu asistente IA de forma natural:
 | What you say / Lo que dices | Tool used |
 |-----------------------------|-----------|
 | "Find developers who know Rust" | `search_users` |
+| "Follow user maria_dev" | `follow` |
+| "Who am I following?" | `my_following` |
+| "Discover people who work with Python" | `discover` |
 | "Send a message to luis saying hi" | `send_message` |
 | "Check my messages" | `get_messages` |
 | "Post: just deployed my first MCP server!" | `create_post` |
+| "Like post #5" | `like_post` |
 | "Show me the latest posts" | `get_feed` |
+| "Check my notifications" | `get_notifications` |
 | "Share this tutorial about FastAPI" | `share_resource` |
 | "Search resources about typescript" | `search_resources` |
 
@@ -169,10 +194,12 @@ Una vez conectado, habla con tu asistente IA de forma natural:
 
 | Endpoint | Method | Auth | Description |
 |----------|--------|------|-------------|
+| `/` | GET | No | Landing page |
 | `/health` | GET | No | Health check |
 | `/auth/signup` | POST | No | Create account, get token |
 | `/auth/login` | POST | No | Login, get fresh token |
 | `/mcp` | POST | Bearer JWT | MCP tool invocations (JSON-RPC 2.0) |
+| `/admin?secret=X` | GET | Secret | Admin dashboard |
 
 ### MCP Request Format / Formato de petición MCP
 
@@ -212,10 +239,11 @@ This is an open project. If you want to contribute:
 3. Submit a PR
 
 Ideas for contributions:
-- Groups / Grupos
-- Reactions to posts / Reacciones a posts
-- Follow system / Sistema de seguimiento
+- Thread replies to posts / Respuestas en hilo
+- Reactions beyond likes / Reacciones más allá de likes
 - Web frontend dashboard
+- Group chats / Chats grupales
+- Profile badges / Insignias de perfil
 
 ---
 

@@ -66,7 +66,7 @@ footer{margin-top:2rem;color:#64748b;font-size:.85rem}
 </div>
 
 <div class="card">
-<h2>🛠️ 13 Tools Available</h2>
+<h2>🛠️ 20 Tools Available</h2>
 <div class="tools-grid">
 <div class="tool"><strong>register</strong><span>Create profile</span></div>
 <div class="tool"><strong>get_profile</strong><span>View any user</span></div>
@@ -78,6 +78,13 @@ footer{margin-top:2rem;color:#64748b;font-size:.85rem}
 <div class="tool"><strong>create_post</strong><span>Public feed post</span></div>
 <div class="tool"><strong>get_feed</strong><span>Read feed</span></div>
 <div class="tool"><strong>delete_post</strong><span>Delete your post</span></div>
+<div class="tool"><strong>like_post</strong><span>Like a post</span></div>
+<div class="tool"><strong>follow</strong><span>Follow a dev</span></div>
+<div class="tool"><strong>unfollow</strong><span>Unfollow a dev</span></div>
+<div class="tool"><strong>my_following</strong><span>Who you follow</span></div>
+<div class="tool"><strong>get_notifications</strong><span>Your alerts</span></div>
+<div class="tool"><strong>mark_read</strong><span>Mark as read</span></div>
+<div class="tool"><strong>discover</strong><span>Discover devs</span></div>
 <div class="tool"><strong>share_resource</strong><span>Share link/snippet</span></div>
 <div class="tool"><strong>search_resources</strong><span>Find resources</span></div>
 <div class="tool"><strong>report_content</strong><span>Flag bad content</span></div>
