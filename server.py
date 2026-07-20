@@ -47,6 +47,10 @@ from mcp_dev_network.tools.get_feed import GetFeedRequest, handle_get_feed
 from mcp_dev_network.tools.list_users import ListUsersRequest, handle_list_users
 from mcp_dev_network.tools.get_my_profile import GetMyProfileRequest, handle_get_my_profile
 from mcp_dev_network.tools.delete_post import DeletePostRequest, handle_delete_post
+from mcp_dev_network.tools.follow import FollowRequest, UnfollowRequest, MyFollowingRequest, handle_follow, handle_unfollow, handle_my_following
+from mcp_dev_network.tools.like_post import LikePostRequest, handle_like_post
+from mcp_dev_network.tools.notifications import GetNotificationsRequest, MarkReadRequest, handle_get_notifications, handle_mark_read
+from mcp_dev_network.tools.discover import DiscoverRequest, handle_discover
 
 # ---------------------------------------------------------------------------
 # Tool registry: maps tool name → (request model, handler, needs_user_id)
@@ -115,6 +119,41 @@ _TOOLS: dict[str, dict[str, Any]] = {
     "delete_post": {
         "model": DeletePostRequest,
         "handler": handle_delete_post,
+        "needs_user_id": True,
+    },
+    "follow": {
+        "model": FollowRequest,
+        "handler": handle_follow,
+        "needs_user_id": True,
+    },
+    "unfollow": {
+        "model": UnfollowRequest,
+        "handler": handle_unfollow,
+        "needs_user_id": True,
+    },
+    "my_following": {
+        "model": MyFollowingRequest,
+        "handler": handle_my_following,
+        "needs_user_id": True,
+    },
+    "like_post": {
+        "model": LikePostRequest,
+        "handler": handle_like_post,
+        "needs_user_id": True,
+    },
+    "get_notifications": {
+        "model": GetNotificationsRequest,
+        "handler": handle_get_notifications,
+        "needs_user_id": True,
+    },
+    "mark_read": {
+        "model": MarkReadRequest,
+        "handler": handle_mark_read,
+        "needs_user_id": True,
+    },
+    "discover": {
+        "model": DiscoverRequest,
+        "handler": handle_discover,
         "needs_user_id": True,
     },
 }
