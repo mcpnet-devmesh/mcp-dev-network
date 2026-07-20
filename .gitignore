@@ -9,3 +9,7 @@ build/
 .venv/
 private_key.pem
 test_register.py
+test_phase1.py
+test_social.py
+check_msgs.py
+content
