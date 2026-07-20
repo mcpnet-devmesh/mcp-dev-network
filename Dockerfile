@@ -17,6 +17,7 @@ COPY logger.py /app/mcp_dev_network/
 COPY models.py /app/mcp_dev_network/
 COPY rate_limit.py /app/mcp_dev_network/
 COPY server.py /app/mcp_dev_network/
+COPY web.py /app/mcp_dev_network/
 COPY wrapper.py /app/mcp_dev_network/
 COPY tools/ /app/mcp_dev_network/tools/
 

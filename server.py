@@ -21,6 +21,7 @@ from pydantic import ValidationError
 
 from mcp_dev_network.auth import verify_token
 from mcp_dev_network.auth_self import router as auth_router
+from mcp_dev_network.web import router as web_router
 from mcp_dev_network.database import close_pool, get_pool, set_user_context
 from mcp_dev_network.logger import log_event
 from mcp_dev_network.models import (
@@ -43,6 +44,9 @@ from mcp_dev_network.tools.share_resource import ShareResourceError, handle_shar
 from mcp_dev_network.tools.search_users import SearchUsersRequest, handle_search_users
 from mcp_dev_network.tools.create_post import CreatePostRequest, handle_create_post
 from mcp_dev_network.tools.get_feed import GetFeedRequest, handle_get_feed
+from mcp_dev_network.tools.list_users import ListUsersRequest, handle_list_users
+from mcp_dev_network.tools.get_my_profile import GetMyProfileRequest, handle_get_my_profile
+from mcp_dev_network.tools.delete_post import DeletePostRequest, handle_delete_post
 
 # ---------------------------------------------------------------------------
 # Tool registry: maps tool name → (request model, handler, needs_user_id)
@@ -98,6 +102,21 @@ _TOOLS: dict[str, dict[str, Any]] = {
         "handler": handle_get_feed,
         "needs_user_id": False,
     },
+    "list_users": {
+        "model": ListUsersRequest,
+        "handler": handle_list_users,
+        "needs_user_id": False,
+    },
+    "get_my_profile": {
+        "model": GetMyProfileRequest,
+        "handler": handle_get_my_profile,
+        "needs_user_id": True,
+    },
+    "delete_post": {
+        "model": DeletePostRequest,
+        "handler": handle_delete_post,
+        "needs_user_id": True,
+    },
 }
 
 
@@ -134,6 +153,8 @@ app = FastAPI(
 
 # Self-service auth endpoints
 app.include_router(auth_router)
+# Web pages (landing + admin)
+app.include_router(web_router)
 
 
 # ---------------------------------------------------------------------------
